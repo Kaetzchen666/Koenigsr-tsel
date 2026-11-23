@@ -155,7 +155,9 @@ td input:disabled {
 @media (max-width:420px) {
   .panel { padding:12px; }
   th,td { width:70px; }
-}
+#resultCode[hidden] {
+  display: none !important;
+}}
 </style>
 </head>
 <body>
@@ -178,7 +180,7 @@ td input:disabled {
   <div class="controls">
     <button id="checkButton" type="button">✓&nbsp; Prüfen</button>
     <div id="feedback" aria-live="polite"></div>
-  <div id="resultCode" aria-live="polite" style="display: none;">HE</div>
+ <div id="resultCode" hidden aria-live="polite">HE</div>
   </div>
 </main>
 
@@ -224,7 +226,7 @@ function checkAnswer() {
     feedback.textContent = "Richtig! Das Siegel ist gebrochen.";
     feedback.className = "success";
     checkButton.style.display = "none";
-   document.getElementById("resultCode").style.display = "flex";
+   document.getElementById("resultCode").hidden = false;
   } else {
     feedback.textContent = "Richtig! Die nächste Lücke ist freigeschaltet.";
     feedback.className = "success";
