@@ -104,10 +104,21 @@ td input:disabled {
 .error { color:#9d2018; }
 .success { color:#31552b; }
 .arrow-wrap {
-  position:relative;
-  width:76px;
-  height:58px;
-  margin-top:2px;
+  #resultCode {
+  display: none;
+  width: 90px;
+  height: 58px;
+  margin: 2px auto 0;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #76521d;
+  border-radius: 9px;
+  background: linear-gradient(#e5c46d,#ae812b);
+  color: white;
+  font: bold 32px Georgia,serif;
+  letter-spacing: 5px;
+  box-shadow: 0 3px 7px rgba(0,0,0,.25);
+}
 }
 #nextButton {
   display:flex;
@@ -167,10 +178,7 @@ td input:disabled {
   <div class="controls">
     <button id="checkButton" type="button">✓&nbsp; Prüfen</button>
     <div id="feedback" aria-live="polite"></div>
-    <div class="arrow-wrap">
-      <a id="nextButton" href="#" target="_top" aria-label="Zur nächsten Seite">➜</a>
-      <div id="cover" aria-hidden="true"></div>
-    </div>
+   <div id="resultCode" aria-live="polite">HE</div>
   </div>
 </main>
 
@@ -216,9 +224,7 @@ function checkAnswer() {
     feedback.textContent = "Richtig! Das Siegel ist gebrochen.";
     feedback.className = "success";
     checkButton.style.display = "none";
-    const cover = document.getElementById("cover");
-    cover.style.opacity = "0";
-    setTimeout(() => { cover.style.display = "none"; }, 950);
+   document.getElementById("resultCode").style.display = "flex";
   } else {
     feedback.textContent = "Richtig! Die nächste Lücke ist freigeschaltet.";
     feedback.className = "success";
@@ -235,18 +241,6 @@ fieldIds.forEach(id => {
   });
 });
 
-document.getElementById("nextButton").addEventListener("click", event => {
-  if (!completed) {
-    event.preventDefault();
-    return;
-  }
-  if (NEXT_PAGE_URL.includes("HIER_DEN_LINK")) {
-    event.preventDefault();
-    alert("Bitte trage zuerst den Link zur nächsten Genially-Seite in NEXT_PAGE_URL ein.");
-  } else {
-    event.currentTarget.href = NEXT_PAGE_URL;
-  }
-});
 </script>
 </body>
 </html>
